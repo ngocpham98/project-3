@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragment::head}"></head>
+
+<body>
+<!-- Page Preloder -->
+<div id="preloder">
+    <div class="loader"></div>
+</div>
+
+<!-- Header Section Begin -->
+<header class="header" th:replace="~{fragment::header}"></header>
+<!-- Header Section End -->
+
+<!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-section set-bg" th:attr="data-setbg=@{/img/breadcrumb.jpg}">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb__text">
+                    <h2>Organi Shop</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Section End -->
+
+<!-- Checkout Section Begin -->
+<section class="checkout spad">
+    <div class="container">
+        <div class="checkout__form">
+            <h4>Billing Details</h4>
+            <h5>Address</h5>
+            <form th:action="@{/checkout}" method="post">
+                <div class="row">
+                    <div class="col-lg-8 col-md-6">
+                        <div class="address-box-checkout">
+                            <ul class="list-address-checkout pt-2 pb-2">
+                                <li th:each="address:${addresses}">
+                                    <div class="d-flex" style="height: 30px">
+                                        <input type="radio" name="address" id="address" th:value="${address.id}">
+                                        <p class="address-name" th:text="*{address.recipientName}"></p>
+                                        <p class="address-phone" th:text="*{address.recipientPhone}"></p>
+                                    </div>
+                                    <p class="address" th:text="*{address.addressToString()}"></p>
+                                </li>
+                            </ul>
+                        </div>
+                        <button type="button" class="btn btn-success" style="margin: 15px auto 15px auto" data-bs-toggle="modal" data-bs-target="#exampleModal">+ Use different address</button>
+
+
+                        <div>
+                            <p style="margin: 10px auto;">Notes</p>
+                            <div class="checkout__input">
+                                <input type="text" name="note" placeholder="Notes about your order, e.g. special notes for delivery.">
+                            </div>
+                        </div>
+                        <h5>Payment</h5>
+                        <div class="payment">
+                            <input type="radio" id="payment" checked>
+                            <label for="payment">Cash</label>
+                        </div>
+
+
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                            <div class="checkout__order">
+                            <h4>Your Order</h4>
+                            <div class="checkout__order__products">Products <span>Total</span></div>
+                            <ul>
+                                <li th:each="item:${cartItems}">
+                                    <p th:text="*{item.product.name}" style="display: inline-block"></p>
+                                    <span th:text="${item.totalPrice}"></span>
+                                </li>
+                            </ul>
+                            <div class="checkout__order__subtotal">Subtotal <span th:text="${cart.totalPrice}"></span>
+                            </div>
+                            <ul>
+                                <li>Shipping fee<span>5.0</span></li>
+                            </ul>
+                            <div class="checkout__order__total">Total <span th:text="${cart.totalPrice + 5.0}"></span>
+                            </div>
+                            <button type="submit" class="site-btn">PLACE ORDER</button>
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <p class="modal-title checkout-newaddress" id="exampleModalLabel">New address</p>
+                                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <form th:action="@{${action}}" th:object="${address}" method="post">
+                                    <div class="modal-body">
+                                        <div class="mb-3">
+                                            <input type="hidden" th:field="*{id}">
+                                            <label class="form-label" for="recipientName">Recipient</label>
+                                            <input type="text" class="form-control mb-1" id="recipientName" th:field="*{recipientName}">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label" for="recipientPhone">Phone number</label>
+                                            <input type="text" class="form-control" id="recipientPhone" th:field="*{recipientPhone}">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label" for="province">Province</label>
+                                            <input type="text" class="form-control mb-1" id="province" th:field="*{province}">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label" for="city">City</label>
+                                            <input type="text" class="form-control mb-1" id="city" th:field="*{city}">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label" for="district">District</label>
+                                            <input type="text" class="form-control mb-1" id="district" th:field="*{district}">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label" for="street">Street</label>
+                                            <input type="text" class="form-control mb-1" id="street" th:field="*{street}">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label" for="detail">Detail</label>
+                                            <textarea type="text" class="form-control mb-1" id="detail" th:field="*{detail}"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Add address</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+
+        </div>
+    </div>
+</section>
+<!-- Checkout Section End -->
+
+<!-- Footer Section Begin -->
+<footer class="footer spad" th:replace="~{fragment::footer}"></footer>
+<!-- Footer Section End -->
+
+<!-- Js Plugins -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script th:src="@{/js/jquery.nice-select.min.js}"></script>
+<script th:src="@{/js/jquery-ui.min.js}"></script>
+<script th:src="@{/js/jquery.slicknav.js}"></script>
+<script th:src="@{/js/mixitup.min.js}"></script>
+<script th:src="@{/js/owl.carousel.min.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+
+
+</body>
+
+</html>

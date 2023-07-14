@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ogani Template">
+    <meta name="keywords" content="Ogani, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Organic Food</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/login-customer.css}" type="text/css">
+
+</head>
+<body>
+<!-- sign-up page -->
+<h2>Sign Up Now</h2>
+
+<div class="login-page">
+    <div class="form">
+        <form class="login-form" th:action="@{/register}" th:object="${customer}" method="post">
+            <div th:if="${success}">
+                <p class="alert alert-success" th:text="${success}"></p>
+            </div>
+            <div th:if="${failure}">
+                <p class="alert alert-danger" th:text="${failure}"></p>
+            </div>
+            <input type="text" placeholder="First Name" name="firstName" th:field="*{firstName}" id="firstName" required/>
+            <input type="text" placeholder="Last Name" name="lastName" th:field="*{lastName}" id="lastName" required/>
+            <div class="alert alert-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+            <input type="email" placeholder="Email" name="username" th:field="*{username}"id="username" required/>
+            <div class="alert alert-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+            <input type="password" placeholder="Password" name="password" id="password" th:field="*{password}" required/>
+            <input type="password" placeholder="Repeat password" name="repeat-password" id="repeat-password" th:field="*{repeatPassword}" required/>
+            <button type="submit">create Account</button>
+            <p class="message">Already registered? <a th:href="@{/login}">Sign In</a></p>
+        </form>
+    </div>
+</div>
+<!-- partial -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+
+</body>
+</html>

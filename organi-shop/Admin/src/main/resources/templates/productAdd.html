@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragment::head}">
+</head>
+<body>
+<nav class="navbar navbar-color">
+    <div class="container-fluid">
+        <a class="navbar-brand home" th:href="@{/home}">Home</a>
+        <a class="nav-link active logout" style="margin-right: 30px" th:href="@{/logout}">Logout</a>
+    </div>
+</nav>
+<div class="container mt-4">
+    <h3>New Product</h3>
+    <br>
+    <form th:action="@{${action}}" method="post" th:object="${product}" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-sm-5">
+                <input type="hidden" name="id" th:field="*{id}">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" required th:field="*{name}" name="name" id="name"
+                           placeholder="Enter name">
+
+                </div>
+                <div class="form-group">
+                    <label for="category">Select Category</label>
+                    <select class="form-control" th:field="*{categoryId}" id="category" name="category">
+                        <option th:value="0">-Select-</option>
+                        <option th:each="category :${categories}"
+                                th:value="${category.id}"
+                                th:text="${category.name}"
+                        ></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="price">Price</label>
+                    <input type="number" class="form-control" required th:field="*{price}" name="price" id="price"
+                           placeholder="Price">
+                </div>
+                <div class="form-group">
+                    <label for="price">Quantity</label>
+                    <input type="number" class="form-control" required th:field="*{quantity}" name="price" id="quantity"
+                           placeholder="Price">
+                </div>
+                <div class="form-group">
+                    <label for="description">Product Description</label>
+                    <textarea class="form-control" rows="5" th:field="*{description}" name="description"
+                              id="description"></textarea>
+                </div>
+            </div>
+
+            <div class="col-sm-5">
+                <p>Product Image</p>
+                <div class="custom-file">
+                    <label for="productImage">Choose file</label>
+                    <input type="file" class="input-file" name="productImage" accept="image/*" id="productImage"/>
+                </div>
+                <div class="form-group">
+                    <img src="#" id="imgPreview" height="100px" width="100px" th:src="@{*{'/productImages/' + image}}"
+                         style="margin-top: 20px" alt=" ">
+                </div>
+                <input type="hidden" name="imageName" th:value="${product.image}">
+                <button type="submit" class="btn btn-success">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+.navbar-color{
+    background-color: #89bb3f;
+}
+.home{
+    margin-left: 20px;
+    color: #fff;
+}
+.btn-outline-success{
+    color: #fff;
+    border-color: #fff;
+}
+.table td{
+    text-align: center;
+    vertical-align: middle;
+}
+thead{
+    text-align: center;
+}
+.icon{
+    text-decoration: none;
+    color: #2A2F4F;
+    font-size: 20px;
+}
+.add-button{
+    font-size: 24px;
+    margin-bottom: 40px;
+}
+.logout{
+    margin-right: 30px;
+    color: #fff;
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ogani Template">
+    <meta name="keywords" content="Ogani, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Organic Food</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/login-customer.css}" type="text/css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<h2>Welcome to Organi shop</h2>
+<div class="login-page">
+    <div class="form">
+        <div th:if="${param.error}" class="alert alert-danger text-center">
+            Invalid username or password
+        </div>
+        <div th:if="${param.logout}" class="alert alert-success text-center">
+            You have been logged out!
+        </div>
+        <form class="login-form" th:action="@{/login}" method="post">
+            <input type="email" name="username" id="username" placeholder="Email"/>
+            <input type="password" name="password" id="password" placeholder="Password"/>
+            <button type="submit">login</button>
+            <p class="message">Not registered? <a th:href="@{/register}">Create an account</a></p>
+        </form>
+    </div>
+</div>
+<!-- Js Plugins -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+
+</body>
+</html>

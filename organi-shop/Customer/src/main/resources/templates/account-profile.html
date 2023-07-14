@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragment::head}"></head>
+
+<body>
+<!-- Page Preloder -->
+<div id="preloder">
+    <div class="loader"></div>
+</div>
+
+<!-- Header Section Begin -->
+<header class="header" th:replace="~{fragment::header}"></header>
+<!-- Header Section End -->
+<div class="container light-style flex-grow-1 container-p-y mb-5">
+    <div class="card overflow-hidden">
+        <div class="row no-gutters row-bordered row-border-light">
+            <div class="col-md-3 pt-0">
+                <div class="list-group list-group-flush account-settings-links">
+                    <a class="list-group-item list-group-item-action active"
+                       th:href="@{/account/profile}">General</a>
+                    <a class="list-group-item list-group-item-action"
+                       th:href="@{/account/address}">Address</a>
+                    <a class="list-group-item list-group-item-action endlist"
+                       th:href="@{/account/orders}">Order history</a>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="tab-content pb-4">
+                    <form th:action="@{/account/profile}" th:object="${account}" enctype="multipart/form-data"
+                          method="post">
+                        <div class="tab-pane fade active show" id="account-general">
+                            <div class="card-body media align-items-center">
+                                <img th:src="@{*{'/customerImages/' + avatar}}" alt="" class="d-block ui-w-80">
+                                <div class="media-body ml-4">
+                                    <input type="file" class="input-file" name="customerImage" accept="image/*"
+                                           id="customerImage"/>
+                                </div>
+                                <input type="hidden" name="imageName" th:value="${account.avatar}">
+                            </div>
+                            <hr class="border-light m-0">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <input type="hidden" th:field="*{id}">
+                                    <label class="form-label" for="firstName">First name</label>
+                                    <input type="text" class="form-control mb-1" th:field="*{firstName}" id="firstName">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="lastName">Last name</label>
+                                    <input type="text" class="form-control" th:field="*{lastName}" id="lastName">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="phoneNumber">Phone number</label>
+                                    <input type="text" class="form-control mb-1" th:field="*{phoneNumber}"
+                                           id="phoneNumber">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Save changes</button>&nbsp;
+                                <button type="button" class="btn btn-default">Cancel</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Footer Section Begin -->
+<footer class="footer spad" th:replace="~{fragment::footer}"></footer>
+<!-- Footer Section End -->
+
+<!-- Js Plugins -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script th:src="@{/js/jquery.nice-select.min.js}"></script>
+<script th:src="@{/js/jquery-ui.min.js}"></script>
+<script th:src="@{/js/jquery.slicknav.js}"></script>
+<script th:src="@{/js/mixitup.min.js}"></script>
+<script th:src="@{/js/owl.carousel.min.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>
